@@ -65,5 +65,8 @@ app.delete("/api/notes/:id", (req, res) => {
 })
 
 // Set listener for port
+app.listen(PORT, () => {
+    console.log('App listening on PORT: ' + PORT);
+  });
 
 // RUN NODE SERVER.JS
