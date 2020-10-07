@@ -27,12 +27,13 @@ app.get("/api/notes", (req, res) => {
 });
 
 // POST new note
-app.get("/api/notes", (req, res) => {
-    let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+app.post("/api/notes", (req, res) => {
+    let notes = JSON.parse(fs.readFileSync("./db/db.json")) || [];
+    let newID = notesDB.length + 1;
     let newNote = {
         title: req.body.title,
-        text: req.doby.text,
-        id: notesDB.length + 1
+        text: req.body.text,
+        id: newID
     }
 
     // PUSH new note to notes
@@ -49,6 +50,7 @@ app.get("/api/notes", (req, res) => {
 // DELETE note
 app.delete("/api/notes/:id", (req, res) => {
     let notes = JSON.parse(fs.readFileSync("./db/db.json")) || [];
+    let id = notesBD.length.id;
 
     for (let i = 0; i < notes.length; i++) {
         if (notesDB[i].id !== parseInt(req.params.id)) {
