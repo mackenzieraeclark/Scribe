@@ -41,13 +41,28 @@ app.get("/api/notes", (req, res) => {
     // FS to write new note to db
     fs.writeFileSync("./db/db.json", JSON.stringify(notes), (err) => {
         if (err) throw err;
-        //console.log("Error writing new note");
     });
 
     return res.json(notes);
 });
 
 // DELETE note
+app.delete("/api/notes/:id", (req, res) => {
+    let notes = JSON.parse(fs.readFileSync("./db/db.json")) || [];
+
+    for (let i = 0; i < notes.length; i++) {
+        if (notesDB[i].id !== parseInt(req.params.id)) {
+            notes.push(notesDB[i]);
+        };
+    };
+    
+    // FS to write notes WITHOUT above id to db
+    fs.writeFileSync("./db/db.json", JSON.stringify(notes), (err) => {
+        if (err) throw err;
+    });
+
+    return res.json(notes);
+})
 
 // Set listener for port
 
