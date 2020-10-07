@@ -44,27 +44,27 @@ app.post("/api/notes", (req, res) => {
         if (err) throw err;
     });
 
-    return res.json(notes);
+    notesDB = notes;
+    res.json(notesDB);
 });
 
 // DELETE note
 app.delete("/api/notes/:id", (req, res) => {
+    
+    let thisID = req.params.id;
     let notes = JSON.parse(fs.readFileSync("./db/db.json")) || [];
-    let id = notesBD.length.id;
 
     for (let i = 0; i < notes.length; i++) {
-        if (notesDB[i].id !== parseInt(req.params.id)) {
-            notes.push(notesDB[i]);
-        };
-    };
-    
-    // FS to write notes WITHOUT above id to db
-    fs.writeFileSync("./db/db.json", JSON.stringify(notes), (err) => {
-        if (err) throw err;
-    });
+        if (parseInt(notes[i].id) == thisID) {
+            notes.splice(i, 1);
+            fs.writeFileSync("./db/db.json", JSON.stringify(notes));
+        }
+    }
 
-    return res.json(notes);
-})
+    // res.json(JSON.parse(fs.readFileSync("db/db.json")));
+    notesDB = notes;
+    res.json(notesDB);
+});
 
 // Set listener for port
 app.listen(PORT, () => {
