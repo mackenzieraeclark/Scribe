@@ -27,6 +27,25 @@ app.get("/api/notes", (req, res) => {
 });
 
 // POST new note
+app.get("/api/notes", (req, res) => {
+    let notes = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+    let newNote = {
+        title: req.body.title,
+        text: req.doby.text,
+        id: notesDB.length + 1
+    }
+
+    // PUSH new note to notes
+    notes.push(newNote);
+
+    // FS to write new note to db
+    fs.writeFileSync("./db/db.json", JSON.stringify(notes), (err) => {
+        if (err) throw err;
+        //console.log("Error writing new note");
+    });
+
+    return res.json(notes);
+});
 
 // DELETE note
 
