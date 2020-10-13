@@ -4,6 +4,9 @@ Scribe helps you organize your notes. Manage your notes directly in the browser 
 ## Deployed Application
 https://stormy-badlands-96335.herokuapp.com/
 
+![DEMO](https://user-images.githubusercontent.com/53440608/95908913-ad97ca80-0d6b-11eb-84c2-ab7c922ab630.png)
+
+
 ## Technologies
 This application was built using Express and the Node.js fs module. Graphics were created with Adobe Illustrator.
 
